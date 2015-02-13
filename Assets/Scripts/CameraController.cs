@@ -16,8 +16,6 @@ public class CameraController : MonoBehaviour
 
 	public Vector3 direction;
 
-	private float maxHeight = 2;
-
 	void Start ()
 	{
 		playerController = player.GetComponent <PlayerController> ();

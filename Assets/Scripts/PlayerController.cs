@@ -5,8 +5,6 @@ public class PlayerController : MonoBehaviour
 {
 	private GameObject player;
 	public GameObject camera;
-
-	private CameraController cameraController;
 	
 	public Vector3 front;
 	public Vector3 gravity;
@@ -29,7 +27,6 @@ public class PlayerController : MonoBehaviour
 	void Start ()
 	{
 		player = GameObject.FindGameObjectWithTag ("Player");
-		cameraController = camera.GetComponent <CameraController> ();
 		
 		currentPos = new Vector3 (player.transform.position.x, 0, player.transform.position.z);
 		
