@@ -886,7 +886,7 @@ MonoBehaviour:
   front: {x: 0, y: 0, z: 0}
   gravity: {x: 0, y: 0, z: 0}
   speed: 1000
-  maxFlipTime: .600000024
+  maxFlipTime: .400000006
 --- !u!1 &1881728767
 GameObject:
   m_ObjectHideFlags: 0
