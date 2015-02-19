@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour
 	private float flippedTime;
 	private Vector3 oldFront;
 	private bool isFlipped;
+
+	public int collisions = 0;
 	
 	void Start ()
 	{
@@ -37,8 +39,13 @@ public class PlayerController : MonoBehaviour
 	
 	void FixedUpdate ()
 	{
-		float moveHorizontal = Input.GetAxis ("Horizontal");
+		float moveHorizontal = 0;
 		float moveVertical = Input.GetAxis ("Vertical");
+
+		//prevent horizontal movement if the player is in the air
+		if (collisions > 0) {
+			moveHorizontal = Input.GetAxis ("Horizontal");
+		}
 
 		//helps controls on a camera flip
 		if (isFlipped) 
@@ -89,6 +96,14 @@ public class PlayerController : MonoBehaviour
 		//drawing front and gravity ray
 		Debug.DrawRay (player.transform.position, front * 5, Color.cyan);
 		Debug.DrawRay (player.transform.position, gravity * 5, Color.red);
+	}
+
+	void OnCollisionEnter() {
+		collisions++;
+	}
+
+	void OnCollisionExit() {
+		collisions--;
 	}
 
 	Vector3 getRelativeDirection(Vector3 front, float vertical, float horizontal)
