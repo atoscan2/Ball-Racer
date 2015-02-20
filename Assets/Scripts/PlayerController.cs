@@ -39,13 +39,8 @@ public class PlayerController : MonoBehaviour
 	
 	void FixedUpdate ()
 	{
-		float moveHorizontal = 0;
+		float moveHorizontal = Input.GetAxis ("Horizontal");
 		float moveVertical = Input.GetAxis ("Vertical");
-
-		//prevent horizontal movement if the player is in the air
-		if (collisions > 0) {
-			moveHorizontal = Input.GetAxis ("Horizontal");
-		}
 
 		//helps controls on a camera flip
 		if (isFlipped) 

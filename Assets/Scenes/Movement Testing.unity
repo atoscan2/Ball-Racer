@@ -451,7 +451,7 @@ GameObject:
   - 132: {fileID: 1067548209}
   - 114: {fileID: 1067548208}
   m_Layer: 0
-  m_Name: Reload Text
+  m_Name: Reloader
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
