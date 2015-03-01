@@ -4,10 +4,9 @@ using System.Collections;
 public class PlayerController : MonoBehaviour 
 {
 	private GameObject player;
-	public GameObject camera;
 	
-	public Vector3 front;
-	public Vector3 gravity;
+	private Vector3 front;
+	private Vector3 gravity;
 	
 	public float speed = 10.0f;
 	private Vector3 currPos;
@@ -42,19 +41,19 @@ public class PlayerController : MonoBehaviour
 		float moveHorizontal = Input.GetAxis ("Horizontal");
 		float moveVertical = Input.GetAxis ("Vertical");
 
-		//helps controls on a camera flip
+		//helps with the controls on a camera flip
 		if (isFlipped) 
 		{
 			moveVertical = -moveVertical;
 		}
 
-		//fixes special case where camera flips out
+		//fixes a special case where the camera flips out
 		if (isNegative(moveVertical) && !isZero(moveHorizontal)) 
 		{
 			moveVertical = 0.0f;
 		}
 
-		//get the correct direction based on where the player is facing
+		//get the correct movement direction based on where the player is facing
 		Vector3 moveDirection = getRelativeDirection (front, moveVertical, moveHorizontal);
 
 		//move the player
@@ -62,7 +61,7 @@ public class PlayerController : MonoBehaviour
 		
 		//calculate the "front" based on the player's movement
 		newPos = new Vector3 (player.transform.position.x, 0, player.transform.position.z);
-		front = newPos - currPos + positionOffset;
+		front = (newPos - currPos) + positionOffset;
 		currPos = newPos;
 			
 		front.Normalize();
@@ -105,6 +104,9 @@ public class PlayerController : MonoBehaviour
 	{
 		Vector3 left = Quaternion.Euler(0, -90, 0) * front;
 		Vector3 right = Quaternion.Euler(0, 90, 0) * front;
+
+		Debug.DrawRay (player.transform.position, left * 5, Color.green);
+		Debug.DrawRay (player.transform.position, right * 5, Color.blue);
 		
 		Vector3 direction = new Vector3 (0, 0, 0);
 		
@@ -127,11 +129,8 @@ public class PlayerController : MonoBehaviour
 		{
 			direction += left;
 		}
-		
+
 		direction.Normalize();
-		
-		Debug.DrawRay (player.transform.position, left * 5, Color.green);
-		Debug.DrawRay (player.transform.position, right * 5, Color.blue);
 		
 		return direction;
 	}
@@ -149,5 +148,15 @@ public class PlayerController : MonoBehaviour
 	bool isNegative(float val)
 	{
 		return val <= -controlThreshold;
+	}
+
+	public Vector3 getFront()
+	{
+		return front;
+	}
+
+	public Vector3 getGravity()
+	{
+		return gravity;
 	}
 }

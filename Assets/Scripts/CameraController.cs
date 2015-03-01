@@ -23,8 +23,8 @@ public class CameraController : MonoBehaviour
 
 	void Update () 
 	{
-		front = playerController.front;
-		gravity = playerController.gravity;
+		front = playerController.getFront();
+		gravity = playerController.getGravity();
 	}
 
 	void FixedUpdate()
